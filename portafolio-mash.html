@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mash — Desarrollo web y herramientas para negocios | Tampa, FL</title>
+<meta name="description" content="Sitios web y herramientas internas para negocios pequeños en Tampa. Órdenes de servicio, control de gastos, registros de trabajo. Web y app Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#131A3A;
+  --ground-2:#1C2650;
+  --paper:#F2EFE9;
+  --paper-2:#E4E0D6;
+  --flame:#FF5C35;
+  --live:#5FD3A8;
+  --dim:#8E97BE;
+  --line:rgba(255,255,255,.14);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --sans:"Public Sans",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --wrap:1120px;
+  --pad:clamp(20px,5vw,52px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ground);color:var(--paper);
+  font-family:var(--sans);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--flame);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 14px;
+}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(27px,4.2vw,42px);
+   line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
+p{margin:0 0 14px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:70;background:rgba(19,26,58,.94);backdrop-filter:blur(9px);
+     border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;padding-top:13px;padding-bottom:13px}
+.mark{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.03em;
+      text-decoration:none;margin-right:auto;display:flex;align-items:baseline;gap:9px}
+.mark i{font-style:normal;color:var(--flame)}
+.mark small{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--dim);font-weight:400}
+@media(max-width:620px){.mark small{display:none}}
+.langtog{display:flex;border:1px solid var(--line);font-family:var(--mono);font-size:11px}
+.langtog button{background:none;border:none;color:var(--dim);padding:7px 11px;cursor:pointer;
+                font-family:inherit;font-size:inherit;letter-spacing:.08em}
+.langtog button[aria-pressed="true"]{background:var(--paper);color:var(--ground)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;
+     font-size:14.5px;padding:11px 19px;background:var(--flame);color:#fff;border:2px solid var(--flame);
+     cursor:pointer;font-family:var(--sans);transition:background .16s,color .16s}
+.btn:hover{background:transparent;color:var(--flame)}
+.btn-line{background:transparent;color:var(--paper);border-color:var(--paper)}
+.btn-line:hover{background:var(--paper);color:var(--ground)}
+
+/* hero */
+.hero{padding-top:clamp(56px,9vw,110px);padding-bottom:clamp(46px,7vw,80px);
+      border-bottom:1px solid var(--line)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,7.4vw,76px);
+         line-height:.96;letter-spacing:-.04em;margin:0 0 22px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--flame)}
+.hero .lede{font-size:clamp(17px,2.2vw,20px);color:#C7CEEA;max-width:52ch;margin-bottom:28px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.stack-strip{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.stack-strip span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--dim);
+                  padding:13px 20px 0 0}
+
+/* section */
+.sec{padding-top:clamp(52px,7vw,88px);padding-bottom:clamp(52px,7vw,88px)}
+.sec-line{border-bottom:1px solid var(--line)}
+.sec-head{max-width:56ch;margin-bottom:34px}
+
+/* REGISTER — signature */
+.reg{border-top:2px solid var(--paper)}
+.row{border-bottom:1px solid var(--line)}
+.rowbtn{
+  width:100%;background:none;border:none;color:inherit;cursor:pointer;text-align:left;
+  display:grid;grid-template-columns:52px 1fr auto auto;gap:18px;align-items:center;
+  padding:22px 4px;font-family:inherit;font-size:inherit;transition:background .2s;
+}
+.rowbtn:hover{background:rgba(255,255,255,.045)}
+.rowbtn .idx{font-family:var(--mono);font-size:12px;color:var(--flame);letter-spacing:.06em}
+.rowbtn .ttl{font-family:var(--display);font-weight:600;font-size:clamp(19px,2.6vw,27px);
+             letter-spacing:-.02em;line-height:1.14}
+.rowbtn .ttl small{display:block;font-family:var(--sans);font-weight:400;font-size:14px;
+                   color:var(--dim);letter-spacing:0;margin-top:3px}
+.status{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;padding:4px 9px;
+        border:1px solid var(--live);color:var(--live);white-space:nowrap}
+.status.wip{border-color:var(--dim);color:var(--dim)}
+.plus{font-family:var(--mono);font-size:20px;color:var(--dim);transition:transform .25s;line-height:1}
+.rowbtn[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--flame)}
+@media(max-width:700px){
+  .rowbtn{grid-template-columns:38px 1fr auto;gap:12px;padding:18px 2px}
+  .rowbtn .status{display:none}
+}
+.panel{display:none;padding:0 4px 30px 70px}
+.panel.open{display:block;animation:slide .3s ease both}
+@keyframes slide{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+@media(max-width:700px){.panel{padding-left:50px}}
+.panel p{color:#C7CEEA;max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 18px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:5px 10px;
+     border:1px solid var(--line);color:var(--dim)}
+.panel-links{display:flex;gap:11px;flex-wrap:wrap}
+.lnk{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-decoration:none;
+     padding:9px 14px;border:1px solid var(--paper);color:var(--paper)}
+.lnk:hover{background:var(--paper);color:var(--ground)}
+.lnk.ghost{border-color:var(--line);color:var(--dim)}
+.lnk.ghost:hover{background:none;border-color:var(--paper);color:var(--paper)}
+
+/* offer */
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1px;
+            background:var(--line);border:1px solid var(--line)}
+.offer{background:var(--ground);padding:26px 24px 30px}
+.offer h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.015em;margin:0 0 9px}
+.offer p{font-size:14.5px;color:var(--dim);margin:0}
+.offer .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--flame);margin-bottom:12px}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px}
+.step{border-top:3px solid var(--flame);padding-top:14px}
+.step b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);display:block;margin-bottom:7px}
+.step h3{font-family:var(--display);font-weight:600;font-size:18px;margin:0 0 6px;letter-spacing:-.01em}
+.step p{font-size:14px;color:var(--dim);margin:0}
+
+/* contact */
+.contact{background:var(--paper);color:var(--ground)}
+.contact h2{color:var(--ground)}
+.contact .eyebrow{color:#6B6558}
+.contact p{color:#4A4740}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center}
+@media(max-width:760px){.cgrid{grid-template-columns:1fr}}
+.bigline{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.4vw,34px);
+         letter-spacing:-.03em;text-decoration:none;display:block;margin-bottom:6px;color:var(--ground)}
+.bigline:hover{color:var(--flame)}
+.contact .btn{margin-top:14px}
+.fillme{font-family:var(--mono);font-size:11.5px;color:#8A6A2E;background:#F7E9C4;
+        border-left:3px solid #C99A2E;padding:9px 12px;margin-top:20px}
+
+/* footer */
+.foot{background:var(--ground);border-top:1px solid var(--line);padding:26px 0;
+      font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.foot .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="mark" href="#top">Mash<i>.</i><small data-es="DESARROLLO WEB · TAMPA, FL" data-en="WEB DEVELOPMENT · TAMPA, FL">DESARROLLO WEB · TAMPA, FL</small></a>
+    <div class="langtog" role="group" aria-label="Idioma">
+      <button id="btES" aria-pressed="true">ES</button>
+      <button id="btEN" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn" href="#contacto" data-es="Hablemos" data-en="Let's talk">Hablemos</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow" data-es="Sitios web · Herramientas internas · Apps Android" data-en="Websites · Internal tools · Android apps">Sitios web · Herramientas internas · Apps Android</p>
+    <h1><span data-es="El papeleo de tu negocio," data-en="Your business paperwork,">El papeleo de tu negocio,</span> <em data-es="hecho software." data-en="turned into software.">hecho software.</em></h1>
+    <p class="lede" data-es="Construyo sitios web y herramientas a medida para negocios pequeños: órdenes de servicio, control de gastos, registros de trabajo. Lo que hoy llevas en una libreta o en un Excel que solo tú entiendes." data-en="I build websites and custom tools for small businesses: service orders, expense tracking, work records. The things you keep today in a notebook or a spreadsheet only you understand.">Construyo sitios web y herramientas a medida para negocios pequeños: órdenes de servicio, control de gastos, registros de trabajo. Lo que hoy llevas en una libreta o en un Excel que solo tú entiendes.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#contacto" data-es="Pedir una cotización" data-en="Request a quote">Pedir una cotización</a>
+      <a class="btn btn-line" href="#registro" data-es="Ver proyectos" data-en="See projects">Ver proyectos</a>
+    </div>
+    <div class="stack-strip">
+      <span>NEXT.JS</span><span>TYPESCRIPT</span><span>SUPABASE</span><span>FIREBASE</span>
+      <span>TAILWIND</span><span>CAPACITOR / ANDROID</span><span>VERCEL</span>
+    </div>
+  </div>
+</header>
+
+<section class="sec sec-line" id="registro">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-es="Registro de proyectos" data-en="Project register">Registro de proyectos</p>
+      <h2 data-es="Cinco cosas que ya están construidas." data-en="Five things already built.">Cinco cosas que ya están construidas.</h2>
+      <p style="color:#C7CEEA" data-es="Toca cualquier fila para ver qué resuelve y abrirlo en vivo." data-en="Tap any row to see what it solves and open it live.">Toca cualquier fila para ver qué resuelve y abrirlo en vivo.</p>
+    </div>
+
+    <div class="reg">
+
+      <!-- 01 -->
+      <div class="row">
+        <button class="rowbtn" aria-expanded="false" aria-controls="p1">
+          <span class="idx">01</span>
+          <span class="ttl">ReciboTrack
+            <small data-es="Control de gastos con lectura automática de recibos" data-en="Expense tracking with automatic receipt reading">Control de gastos con lectura automática de recibos</small>
+          </span>
+          <span class="status" data-es="EN VIVO" data-en="LIVE">EN VIVO</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="panel" id="p1">
+          <p data-es="Le tomas una foto al recibo y la aplicación extrae sola el comercio, la fecha, el total y los impuestos. Todo queda ordenado por categoría, con la imagen guardada por si Hacienda la pide. Pensado para quien acumula recibos en la guantera y en abril no sabe cuánto gastó." data-en="Take a photo of the receipt and the app pulls out the merchant, date, total and tax on its own. Everything gets filed by category, with the image stored in case the IRS asks. Built for anyone who piles receipts in the glovebox and has no idea what they spent come April.">Le tomas una foto al recibo y la aplicación extrae sola el comercio, la fecha, el total y los impuestos. Todo queda ordenado por categoría, con la imagen guardada por si Hacienda la pide. Pensado para quien acumula recibos en la guantera y en abril no sabe cuánto gastó.</p>
+          <div class="tags"><span class="tag">NEXT.JS 16</span><span class="tag">TYPESCRIPT</span><span class="tag">FIREBASE</span><span class="tag">OCR / VISION</span><span class="tag">TAILWIND V4</span></div>
+          <div class="panel-links">
+            <a class="lnk" href="https://recibotrack.vercel.app" target="_blank" rel="noopener" data-es="ABRIR EN VIVO ↗" data-en="OPEN LIVE ↗">ABRIR EN VIVO ↗</a>
+            <a class="lnk ghost" href="https://github.com/MashLanzer/ReciboTrack" target="_blank" rel="noopener">GITHUB ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="row">
+        <button class="rowbtn" aria-expanded="false" aria-controls="p2">
+          <span class="idx">02</span>
+          <span class="ttl">EIV Solution Air
+            <small data-es="Órdenes de servicio digitales para una empresa de aire acondicionado" data-en="Digital service orders for an HVAC company">Órdenes de servicio digitales para una empresa de aire acondicionado</small>
+          </span>
+          <span class="status" data-es="EN VIVO" data-en="LIVE">EN VIVO</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="panel" id="p2">
+          <p data-es="El técnico llena la orden desde el teléfono en casa del cliente: equipo, lecturas, trabajo realizado, firma. Se acabó la hoja de papel que se moja en la camioneta y aparece dos semanas después. La oficina ve el registro en el momento en que se cierra el trabajo." data-en="The tech fills out the order from his phone at the customer's house: equipment, readings, work performed, signature. No more paper sheet that gets soaked in the truck and turns up two weeks later. The office sees the record the moment the job closes.">El técnico llena la orden desde el teléfono en casa del cliente: equipo, lecturas, trabajo realizado, firma. Se acabó la hoja de papel que se moja en la camioneta y aparece dos semanas después. La oficina ve el registro en el momento en que se cierra el trabajo.</p>
+          <div class="tags"><span class="tag">NEXT.JS</span><span class="tag">TYPESCRIPT</span><span class="tag">VERCEL</span><span class="tag">MOBILE FIRST</span></div>
+          <div class="panel-links">
+            <a class="lnk" href="https://eiv-solution-air-service-work-recor.vercel.app" target="_blank" rel="noopener" data-es="ABRIR EN VIVO ↗" data-en="OPEN LIVE ↗">ABRIR EN VIVO ↗</a>
+            <a class="lnk ghost" href="https://github.com/MashLanzer/EIV-SOLUTION-AIR-SERVICE-WORK-RECORD" target="_blank" rel="noopener">GITHUB ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="row">
+        <button class="rowbtn" aria-expanded="false" aria-controls="p3">
+          <span class="idx">03</span>
+          <span class="ttl">Remesas
+            <small data-es="Gestión de envíos, comisiones y saldo entre socios · web + APK Android" data-en="Transfer, commission and partner-balance management · web + Android APK">Gestión de envíos, comisiones y saldo entre socios · web + APK Android</small>
+          </span>
+          <span class="status" data-es="EN VIVO" data-en="LIVE">EN VIVO</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="panel" id="p3">
+          <p data-es="Registra cada envío, calcula la comisión y la ganancia según reglas configurables, la reparte entre socios y lleva el saldo de capital adelantado. La misma base corre como sitio web y como aplicación instalable de Android." data-en="Logs every transfer, calculates commission and profit from configurable rules, splits it between partners and tracks advanced capital. The same codebase runs as a website and as an installable Android app.">Registra cada envío, calcula la comisión y la ganancia según reglas configurables, la reparte entre socios y lleva el saldo de capital adelantado. La misma base corre como sitio web y como aplicación instalable de Android.</p>
+          <div class="tags"><span class="tag">NEXT.JS 14</span><span class="tag">SUPABASE</span><span class="tag">POSTGRES</span><span class="tag">CAPACITOR</span><span class="tag">APK ANDROID</span></div>
+          <div class="panel-links">
+            <a class="lnk" href="https://remesas-nu.vercel.app" target="_blank" rel="noopener" data-es="ABRIR EN VIVO ↗" data-en="OPEN LIVE ↗">ABRIR EN VIVO ↗</a>
+            <a class="lnk ghost" href="https://github.com/MashLanzer/Remesas" target="_blank" rel="noopener">GITHUB ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="row">
+        <button class="rowbtn" aria-expanded="false" aria-controls="p4">
+          <span class="idx">04</span>
+          <span class="ttl">JobKeeper
+            <small data-es="Registro de trabajos y horas — REVISAR ESTA DESCRIPCIÓN" data-en="Job and hours tracking — REVIEW THIS DESCRIPTION">Registro de trabajos y horas — REVISAR ESTA DESCRIPCIÓN</small>
+          </span>
+          <span class="status" data-es="EN VIVO" data-en="LIVE">EN VIVO</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="panel" id="p4">
+          <p data-es="⚠ Este repositorio no tiene README, así que esta descripción es provisional: reemplázala por lo que la herramienta realmente hace antes de enseñar el portafolio a un cliente." data-en="⚠ This repository has no README, so this description is a placeholder: replace it with what the tool actually does before showing this portfolio to a client.">⚠ Este repositorio no tiene README, así que esta descripción es provisional: reemplázala por lo que la herramienta realmente hace antes de enseñar el portafolio a un cliente.</p>
+          <div class="tags"><span class="tag">NEXT.JS</span><span class="tag">TYPESCRIPT</span><span class="tag">VERCEL</span></div>
+          <div class="panel-links">
+            <a class="lnk" href="https://workledger-indol.vercel.app" target="_blank" rel="noopener" data-es="ABRIR EN VIVO ↗" data-en="OPEN LIVE ↗">ABRIR EN VIVO ↗</a>
+            <a class="lnk ghost" href="https://github.com/MashLanzer/JobKeeper" target="_blank" rel="noopener">GITHUB ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="row">
+        <button class="rowbtn" aria-expanded="false" aria-controls="p5">
+          <span class="idx">05</span>
+          <span class="ttl">Fotografías de Ensueños
+            <small data-es="Sitio para estudio fotográfico — sin despliegue publicado" data-en="Photography studio site — no published deployment">Sitio para estudio fotográfico — sin despliegue publicado</small>
+          </span>
+          <span class="status wip" data-es="SIN PUBLICAR" data-en="NOT DEPLOYED">SIN PUBLICAR</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="panel" id="p5">
+          <p data-es="⚠ Este proyecto no tiene enlace en vivo ni README. Publícalo en Vercel y escribe dos líneas sobre qué resuelve, o quítalo del portafolio: una fila sin enlace resta credibilidad a las otras cuatro." data-en="⚠ This project has no live link and no README. Deploy it on Vercel and write two lines about what it does, or remove it: a row with no link undercuts the credibility of the other four.">⚠ Este proyecto no tiene enlace en vivo ni README. Publícalo en Vercel y escribe dos líneas sobre qué resuelve, o quítalo del portafolio: una fila sin enlace resta credibilidad a las otras cuatro.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          <div class="panel-links">
+            <a class="lnk ghost" href="https://github.com/MashLanzer/fotografias-de-ensuenos" target="_blank" rel="noopener">GITHUB ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-es="Qué hago" data-en="What I do">Qué hago</p>
+      <h2 data-es="Tres tipos de trabajo." data-en="Three kinds of work.">Tres tipos de trabajo.</h2>
+    </div>
+    <div class="offer-grid">
+      <div class="offer">
+        <div class="k" data-es="SITIOS WEB" data-en="WEBSITES">SITIOS WEB</div>
+        <h3 data-es="Que traigan llamadas" data-en="That bring in calls">Que traigan llamadas</h3>
+        <p data-es="Sitio rápido, en móvil primero, con botón de llamar y formulario de cotización que llega a donde tú quieras. No un folleto bonito que nadie ve." data-en="Fast, mobile-first, with a call button and a quote form that lands wherever you want it. Not a pretty brochure nobody sees.">Sitio rápido, en móvil primero, con botón de llamar y formulario de cotización que llega a donde tú quieras. No un folleto bonito que nadie ve.</p>
+      </div>
+      <div class="offer">
+        <div class="k" data-es="HERRAMIENTAS INTERNAS" data-en="INTERNAL TOOLS">HERRAMIENTAS INTERNAS</div>
+        <h3 data-es="Que reemplacen el papel" data-en="That replace the paper">Que reemplacen el papel</h3>
+        <p data-es="Órdenes de servicio, control de gastos, registros de trabajo, inventario. Hechas para tu forma de trabajar, no para la de un software genérico." data-en="Service orders, expense tracking, work records, inventory. Built around how you actually work, not around some generic software.">Órdenes de servicio, control de gastos, registros de trabajo, inventario. Hechas para tu forma de trabajar, no para la de un software genérico.</p>
+      </div>
+      <div class="offer">
+        <div class="k" data-es="APPS ANDROID" data-en="ANDROID APPS">APPS ANDROID</div>
+        <h3 data-es="Que vivan en el teléfono" data-en="That live on the phone">Que vivan en el teléfono</h3>
+        <p data-es="La misma herramienta, instalable en el teléfono del equipo. Sin tiendas de aplicaciones ni licencias mensuales por usuario." data-en="The same tool, installable on your team's phones. No app stores, no monthly per-seat licenses.">La misma herramienta, instalable en el teléfono del equipo. Sin tiendas de aplicaciones ni licencias mensuales por usuario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-line">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-es="Cómo trabajo" data-en="How I work">Cómo trabajo</p>
+      <h2 data-es="Sin sorpresas en el precio." data-en="No surprises on price.">Sin sorpresas en el precio.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <b data-es="PASO 01" data-en="STEP 01">PASO 01</b>
+        <h3 data-es="Llamada" data-en="Call">Llamada</h3>
+        <p data-es="20 minutos. Me cuentas el negocio y qué te está costando tiempo hoy." data-en="20 minutes. You tell me about the business and what's eating your time today.">20 minutos. Me cuentas el negocio y qué te está costando tiempo hoy.</p>
+      </div>
+      <div class="step">
+        <b data-es="PASO 02" data-en="STEP 02">PASO 02</b>
+        <h3 data-es="Propuesta cerrada" data-en="Fixed proposal">Propuesta cerrada</h3>
+        <p data-es="Precio fijo por escrito, con el alcance detallado y la fecha de entrega." data-en="Fixed written price, with detailed scope and a delivery date.">Precio fijo por escrito, con el alcance detallado y la fecha de entrega.</p>
+      </div>
+      <div class="step">
+        <b data-es="PASO 03" data-en="STEP 03">PASO 03</b>
+        <h3 data-es="Construcción" data-en="Build">Construcción</h3>
+        <p data-es="Ves avances reales, no reportes. Dos rondas de cambios incluidas." data-en="You see real progress, not status reports. Two rounds of changes included.">Ves avances reales, no reportes. Dos rondas de cambios incluidas.</p>
+      </div>
+      <div class="step">
+        <b data-es="PASO 04" data-en="STEP 04">PASO 04</b>
+        <h3 data-es="Entrega" data-en="Handover">Entrega</h3>
+        <p data-es="Publicado, con accesos a tu nombre y 30 días de garantía." data-en="Published, with accounts in your name and 30 days of warranty.">Publicado, con accesos a tu nombre y 30 días de garantía.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contacto">
+  <div class="wrap cgrid">
+    <div>
+      <p class="eyebrow" data-es="Contacto" data-en="Contact">Contacto</p>
+      <h2 data-es="Cuéntame qué necesitas." data-en="Tell me what you need.">Cuéntame qué necesitas.</h2>
+      <p data-es="Respondo el mismo día. Si prefieres, llámame directo y lo hablamos en cinco minutos." data-en="I answer the same day. If you'd rather, call me and we'll sort it out in five minutes.">Respondo el mismo día. Si prefieres, llámame directo y lo hablamos en cinco minutos.</p>
+    </div>
+    <div>
+      <a class="bigline" href="tel:+18130000000">813-000-0000</a>
+      <a class="bigline" href="mailto:tucorreo@tudominio.com" style="font-size:clamp(17px,2.2vw,22px)">tucorreo@tudominio.com</a>
+      <a class="btn" href="mailto:tucorreo@tudominio.com?subject=Consulta%20desde%20el%20portafolio" data-es="Escribir ahora" data-en="Write now">Escribir ahora</a>
+      <div class="fillme" data-es="⚠ REEMPLAZA: teléfono y correo son de ejemplo. Búscalos en el HTML como 813-000-0000 y tucorreo@tudominio.com" data-en="⚠ REPLACE: phone and email are placeholders. Find 813-000-0000 and tucorreo@tudominio.com in the HTML.">⚠ REEMPLAZA: teléfono y correo son de ejemplo. Búscalos en el HTML como 813-000-0000 y tucorreo@tudominio.com</div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>MASH · TAMPA, FL</span>
+    <span>&copy; <span id="yr"></span> — <span data-es="TODOS LOS DERECHOS RESERVADOS" data-en="ALL RIGHTS RESERVED">TODOS LOS DERECHOS RESERVADOS</span></span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* acordeón del registro */
+document.querySelectorAll('.rowbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.rowbtn').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+      document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
+    });
+    if (!open) { btn.setAttribute('aria-expanded','true'); panel.classList.add('open'); }
+  });
+});
+
+/* idioma */
+const es = document.getElementById('btES');
+const en = document.getElementById('btEN');
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v) el.textContent = v;
+  });
+  es.setAttribute('aria-pressed', String(lang === 'es'));
+  en.setAttribute('aria-pressed', String(lang === 'en'));
+}
+es.addEventListener('click', () => setLang('es'));
+en.addEventListener('click', () => setLang('en'));
+if ((navigator.language || 'es').slice(0,2) === 'en') setLang('en');
+</script>
+</body>
+</html>
