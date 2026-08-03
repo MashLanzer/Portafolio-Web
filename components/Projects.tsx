@@ -62,8 +62,8 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
         ))}
       </div>
 
-      <div className="relative mt-6 flex flex-wrap gap-2.5">
-        {p.live && (
+      {p.live && (
+        <div className="relative mt-6 flex flex-wrap gap-2.5">
           <a
             href={p.live}
             target="_blank"
@@ -72,18 +72,8 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
           >
             {t(T.projects.openLive)} <span aria-hidden>↗</span>
           </a>
-        )}
-        {p.github && (
-          <a
-            href={p.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 border border-line px-3.5 py-2 font-mono text-[12px] tracking-[0.06em] text-dim transition-colors hover:border-paper hover:text-paper"
-          >
-            {t(T.projects.code)} <span aria-hidden>↗</span>
-          </a>
-        )}
-      </div>
+        </div>
+      )}
     </motion.article>
   );
 }
