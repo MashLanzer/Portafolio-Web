@@ -1,0 +1,26 @@
+{
+  "name": "portafolio-mash",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portafolio de Mash — desarrollo web y herramientas para negocios en Tampa, FL",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12",
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
+  }
+}
