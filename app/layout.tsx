@@ -25,6 +25,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portafolio-web-kappa-coral.vercel.app"),
   title: "Mash — Desarrollo web y herramientas para negocios | Tampa, FL",
   description:
     "Sitios web y herramientas internas para negocios pequeños en Tampa. Órdenes de servicio, control de gastos, registros de trabajo. Web y app Android.",

@@ -47,9 +47,9 @@ export const T = {
   stats: {
     title: { es: "En números", en: "By the numbers" },
     items: [
-      { value: 5, suffix: "", label: { es: "Proyectos construidos", en: "Projects built" } },
-      { value: 4, suffix: "", label: { es: "Aplicaciones en vivo", en: "Live applications" } },
+      { value: 4, suffix: "", label: { es: "Proyectos en vivo", en: "Live projects" } },
       { value: 2, suffix: "", label: { es: "Plataformas: web + Android", en: "Platforms: web + Android" } },
+      { value: 100, suffix: "%", label: { es: "Móvil primero", en: "Mobile first" } },
       { value: 24, suffix: "h", label: { es: "Respuesta el mismo día", en: "Same-day response" } },
     ],
   },
@@ -197,23 +197,6 @@ export const PROJECTS: Project[] = [
     status: "live",
     live: "https://workledger-indol.vercel.app",
     github: "https://github.com/MashLanzer/JobKeeper",
-  },
-  {
-    id: "ensuenos",
-    index: "05",
-    emoji: "📷",
-    name: "Fotografías de Ensueños",
-    tagline: {
-      es: "Sitio para estudio fotográfico",
-      en: "Photography studio site",
-    },
-    description: {
-      es: "Sitio de presentación para un estudio fotográfico: galería, servicios y contacto. Construido con web estándar y pensado para cargar rápido en el móvil.",
-      en: "Showcase site for a photography studio: gallery, services and contact. Built with standard web and designed to load fast on mobile.",
-    },
-    tags: ["HTML", "CSS"],
-    status: "wip",
-    github: "https://github.com/MashLanzer/fotografias-de-ensuenos",
   },
 ];
 
